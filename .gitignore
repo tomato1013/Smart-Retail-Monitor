@@ -1,0 +1,9 @@
+﻿.env
+__pycache__/
+*.pyc
+test video/
+*.mp4
+venv/
+leda_server/
+*.zip
+*.rar
