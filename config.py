@@ -20,7 +20,7 @@ PRICE_PER_1M_INPUT = 0.1
 PRICE_PER_1M_OUTPUT = 0.2
 
 # ==================== 2. 相機與模型設定 ====================
-CAM_NAME = "test_2"
+CAM_NAME = "驛結世紀PoC Videos (53).mp4"
 TASK_NAME = "poc-efs"
 MODEL_NAME = "Human"
 
@@ -28,13 +28,11 @@ MODEL_NAME = "Human"
 VIDEO_DIR = "test video" 
 
 # 2. 定義檔名
-VIDEO_FILENAME = "驛結世紀PoC Videos (3).mp4" 
+VIDEO_FILENAME = CAM_NAME 
 
 if VIDEO_FILENAME == "0":
     VIDEO_SRC = "0"
 else:
-    # 3. 修改這裡：把資料夾和檔名接起來，再轉成絕對路徑
-    # 這樣就會變成: D:\File\驛結世紀\test video\驛結世紀PoC Videos (3).mp4
     full_path = os.path.join(VIDEO_DIR, VIDEO_FILENAME)
     VIDEO_SRC = os.path.abspath(full_path)
 
@@ -43,11 +41,10 @@ if VIDEO_FILENAME != "0" and not os.path.exists(VIDEO_SRC):
     print(f"警告：找不到影片！請檢查路徑：{VIDEO_SRC}")
 
 SAVE_DIR = "training_data"
-
 # ==================== 3. 邏輯判定參數 ====================
-CONFIDENCE_THRESHOLD = 0.4 # 信心度門檻
+CONFIDENCE_THRESHOLD = 0.45 # 信心度門檻
 
-MAX_MISSED_FRAMES = 15     # 容許中斷偵數
+MAX_MISSED_FRAMES = 20     # 容許中斷偵數
 
 # 接觸秒數判定
 TRIGGER_SECONDS_PICK = 2.0  # 取貨觸發時間
@@ -81,8 +78,10 @@ PROMPT_PICKING = """
 Analyze the image to determine if the person is retrieving a package from the shelf.
 
 Answer YES only if ALL of the following are true:
-1. **Physical Contact:** The person's hand is touching a box, package, or item on the shelf.
+1. **Physical Contact:** The person's hand is touching or holding a box, package, or item on the shelf. The package may be brown, black or white
 2. **Retrieval Action:** The person is grasping the item and pulling it towards themselves or lifting it off the shelf.
+3. **Intention:** The person is looking toward the shelf and has intention to retrieve their item. 
+
 
 Answer NO if:
 - The person is just standing near the shelf.

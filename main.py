@@ -4,7 +4,6 @@ import numpy as np
 import requests
 import atexit
 
-# 匯入我們先前寫好的三個模組
 import config
 import utils
 import gemini_api
@@ -22,7 +21,7 @@ def main():
     print(f"\n[Step 3] 啟動監控 (Task: {config.TASK_NAME})...")
     print("------------------------------------------------")
     
-    # 建立 Session 以重複使用連線 (提升效能)
+    # 建立 Session 以重複使用連線
     sess = requests.Session()
     detect_url = f"{config.BASE_URL}/api/detect_frame_od"
     result_url = f"{config.BASE_URL}/api/detect_frame_result_od"
@@ -37,6 +36,12 @@ def main():
     # UI 顯示文字
     system_msg = "STAGE 1: Waiting for Pick..."
     last_llm_result = None
+
+    # [新增] 設定視窗屬性為 NORMAL，這樣你就可以用滑鼠拉視窗大小了
+    cv2.namedWindow("Workflow Manager", cv2.WINDOW_NORMAL) 
+    
+    # [選用] 如果你不想手動拉，可以強制設定一個初始大小 (例如 1280x720)
+    cv2.resizeWindow("Workflow Manager", 1280, 720)
 
     # ==================== 2. 主迴圈 ====================
     while True:
