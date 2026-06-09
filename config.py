@@ -20,7 +20,7 @@ PRICE_PER_1M_INPUT = 0.1
 PRICE_PER_1M_OUTPUT = 0.2
 
 # ==================== 2. 相機與模型設定 ====================
-CAM_NAME = "驛結世紀PoC Videos (53).mp4"
+CAM_NAME = "sample_PoC Videos (53).mp4"
 TASK_NAME = "poc-efs"
 MODEL_NAME = "Human"
 
